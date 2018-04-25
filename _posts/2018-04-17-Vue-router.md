@@ -64,5 +64,32 @@ tag: VUE笔记
  <router-link to="/">routerA</router-link>
 
  ```
- 总结：虽然这次的文章只是简单的实现了路由的一个最简单的切换，但是什么都是从最基础的时候开始，所以这篇文章就写个最最基础的路由切换吧，希望算是通俗易懂的。
+ 
+ 4)我们也可以使用to绑定数据或者另一方式进行路由切换，做法如下：
+ ```
+ 在data中的return写下如下的：
+ 
+  urld: {
+	   routerb: '/routerB'
+    
+    然后在视图写法如下：
+    <router-link :to="urld.routerb">routerA</router-link>
+    （:to是v-bind:to的简写）
+ ```
+ 这样的写法也可以实现路由的切换，但是:to却是可以绑定数据进行传递
+ 
+ 5）:to传递数据
+ 路由传递参数：params, 接收参数：route.params.id
+ ```
+ 先在组件routerA中的视图区域写下：
+ <router-link :to="{name:'routerB', params:{count: 100}}">routerB</router-link>
+ 
+ count是定义的id
+ 
+ 在routerB组件中接收参数，所以name：'routerB',具体写法如下：
+ {{ $route.params.count }}
+ 打开浏览器切换到routerB我们会看到100，说明成功传递数据
+ ```
+ 
+ 未完续......
  
