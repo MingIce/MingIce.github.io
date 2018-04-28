@@ -90,6 +90,7 @@ tag: VUE笔记
  {{ $route.params.count }}
  打开浏览器切换到routerB我们会看到100，说明成功传递数据
  ```
- 
+ 效果如下：<br>
+ ![](/images/posts/router1.png) <br>
  未完续......
  
