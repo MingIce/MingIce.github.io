@@ -92,5 +92,81 @@ tag: VUE笔记
  ```
  效果如下：<br>
  ![](/images/posts/router1.png) <br>
+ 6)动态路由
+   我们之前定义的所有路由都是很严格匹配的，只有在视图中的to的绑定的属性和在router文件下的index.js里面注册的component组件的path一致，这样才会显示对应的组件。很多
+   时候我们定义的组件需要做到大部分一样，少部分是动态性的，比如登录的时候，登录成功显示你的用户名，不同的用户名登录显示不同的用户名，但是其他所有的显示的都是一致的，所以这时候我们就需要了动态路由，只有使用动态路由，这样才不会写死这个登录的组件，那么我们可以定义个usera组件，然后在router文件夹下的index.js中写法：{path: "/user/:id", component: userA}，具体代码：
+   ```
+import User from '@/components/user'
+import UserA from '@/components/usera'
+Vue.use(Router)
+
+export default new Router({
+  routes: [
+   /* {
+      path: '/',
+      name: 'routerA',
+      component: RouterA
+    },
+    {
+      path: '/routerB',
+      name: 'routerB',
+      component: RouterB
+    },*/
+    /* user组件是用来和usera组件导航链接的，app.vue,我只是用来显示user了 */
+    {
+      path: '/',
+      name: 'User',
+      component: User
+    },
+     {
+     /* 动态的id */
+      path: '/usera/:id',
+      name: 'usera',
+      component: UserA
+    }
+  ]
+})
+
+   ```
+   user组件的代码如下：
+   ```
+   <template>
+<div>
+<h1>我是</h1>
+<router-link to="/usera/123">User</router-link>
+<router-link to="/usera/456">Usera</router-link>
+</div>
+</template>
+<script>
+export default {
+	name: 'User',
+	data() {
+	   return {
+	   }
+	}
+}
+</script>
+<sytle></style>
+   ```
+   usera组件代码如下：
+   ```
+   <template>
+<div>
+<h1>我是usera</h1>
+<router-link to="/">点击我返回</router-link>
+</div>
+</template>
+<script>
+export default {
+	name: 'usera',
+	data() {
+	   return {
+	   }
+	}
+}
+</script>
+<sytle></style>
+   ```
+  结果就是无论我们点击的是usera/123还是usera/456都是导航到了usera,说明我们在路由的配置中完全正确。
  未完续......
  
