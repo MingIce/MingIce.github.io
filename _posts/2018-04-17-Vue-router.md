@@ -270,11 +270,11 @@ export default {
     	component: home,
     	children: [
     	{
-    		path: '/home/News',
+    		path: 'News',
     	component: News
          },
          {
-         	path: '/home/Message',
+         	path: 'Message',
          	component: Message
 
          }
@@ -294,6 +294,7 @@ export default {
     ]
     })
  ```
+ 注意：children:这个份子路由的path不需要再写/了<br>
  效果图：<br>
   ![](/images/posts/router2.png) <br>
    ![](/images/posts/router3.png) <br>
