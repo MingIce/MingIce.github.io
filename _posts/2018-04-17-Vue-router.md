@@ -171,10 +171,10 @@ export default {
   7)嵌套路由
     实际生活中的应用界面，通常由多层嵌套的组件组合而成。同样地，URL中各段动态路径也按某种结构对应嵌套的各层组件,如下图：
  ```
-	    /user                            /user/Message
-	                                     /user/News
+	    /home                            /home/Message
+	                                     /home/News
 	+------------------+                  +-----------------+
-	| User             |                  | Message  News  |
+	| home             |                  | Message  News  |
 	| +--------------+ |                  | +-------------+ |
 	| |News ，  Message| |  +------------>  | |  内容      | |
 	| |              | |                  | |             | |
@@ -184,5 +184,119 @@ export default {
   实现嵌套路由有两个要点：
 	在组件内部使用<router-view>标签
 	在路由器对象中给组件定义子路由<br>
+ home组件的代码：
+ ```
+ <template>
+<div>
+<h1>HOME</h1>
+<p>{{msg}}</p>
+<ul>
+<li>
+<router-link :to="{path:'/home/News'}">News</router-link>
+</li>
+<li>
+<router-link :to="{path:'/home/Message'}">Message</router-link>
+</li>
+</ul>
+<router-view></router-view>
+</div>
+
+</template>
+<script>
+export default {
+	name: 'home',
+	data() {
+	   return {
+	     msg: 'Hello'
+	   }
+	}
+}
+</script>
+<style></style>
+ ```
+ 下面的是home的子组件，嵌套在home组件中
+ News:
+ ```
+ <template>
+<div>
+<ul>
+<li>news01</li>
+<li>news01</li>
+<li>news01</li>
+</ul>
+</div>
+</template>
+<script>
+export default {
+	name: 'news',
+	data() {
+	   return {
+	   }
+	}
+	
+}
+</script>
+<style></style>
+ ```
+ Message:
+ ```
+ <template>
+<div>
+<ul>
+<li>message01</li>
+<li>message01</li>
+<li>message01</li>
+</ul>
+</div>
+</template>
+<script>
+export default {
+	name: 'message',
+	data() {
+	   return {
+	   }
+	}
+	
+}
+</script>
+<style></style>
+ ```
+ 组件的代码都写好了，但是怎么样把他们嵌套起来呢，且看下面的router的配置，其实从上面的home组件应该都知道了，下面配置代码：
+ ```
+ export default new Router({
+  routes: [
+  {
+    	path: '/home',
+    	component: home,
+    	children: [
+    	{
+    		path: '/home/News',
+    	component: News
+         },
+         {
+         	path: '/home/Message',
+         	component: Message
+
+         }
+    	]
+
+    },
+    {
+      path: '/routerB',
+      name: 'routerB',
+      component: RouterB
+    },
+    {
+      path: '/',
+      name: 'Homes',
+      component: Homes
+    }
+    ]
+    })
+ ```
+ 效果图：
+  ![](/images/posts/router2.png) <br>
+   ![](/images/posts/router3.png) <br>
+    ![](/images/posts/router4.png) <br>
  未完续......
  
