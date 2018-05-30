@@ -268,6 +268,7 @@ export default {
   {
     	path: '/home',
     	component: home,
+	redirect: '/home/News',/* 默认进去重定向的路径 */
     	children: [
     	{
     		path: 'News',
