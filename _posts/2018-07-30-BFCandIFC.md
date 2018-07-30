@@ -36,3 +36,41 @@ tag: css笔记
 
 （如果浮动元素后面跟着一个非浮动元素，那么将会产生重叠现象，常规流（标准流、普通流）是一个文档在被显示时最常见的布局形态，而float不为none、position是fixed和absolute的时候元素将脱离标准流）
 ```
+
+下面我们看一下一个简单的例子：
+
+css部分
+```
+div{
+			width: 600px;
+		}
+		.cl-left {
+			width: 200;
+			background:black;
+			float:left;
+			height:150px;
+		}
+		.main{
+			background:red;
+			height:200px;
+
+		}
+```
+html部分
+```
+<div class="cl-left"></div>
+<div class="main"></div>
+```
+运行代码我们会得到一个效果就是，第一个浮动的div重叠在第二个div之上，此时我们只需要把下面的这个div也变成一个BFC，那么我们可以使用overflow：hidden触发BFC就会得到不会重叠的俩个div了
+```
+.main{
+			overflow:hidden;
+			background:red;
+			height:200px;
+
+		}
+```
+
+
+
+
